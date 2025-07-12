@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quickman Delivery - Fast & Reliable Delivery Services</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#05A045',
+            secondary: '#1d4ed8',
+            accent: '#f97316',
+            glass: 'rgba(255, 255, 255, 0.7)',
+            darkGlass: 'rgba(255, 255, 255, 0.8)'
+          },
+          borderRadius: {
+            'xl': '20px'
+          },
+          animation: {
+            'fadeInLeft': 'fadeInLeft 0.8s ease-out forwards',
+            'fadeInRight': 'fadeInRight 0.8s ease-out forwards',
+            'float': 'float 3s ease-in-out infinite'
+          },
+          keyframes: {
+            fadeInLeft: {
+              '0%': { opacity: '0', transform: 'translateX(-20px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' }
+            },
+            fadeInRight: {
+              '0%': { opacity: '0', transform: 'translateX(20px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-15px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ===== GENERAL STYLES ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+      color: #05A045;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 100px;
+    }
+
+    /* Glass effect */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+      border-radius: 20px;
+    }
+
+    /* ===== HEADER STYLES ===== */
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+    }
+
+    .nav-tab {
+      @apply px-5 py-3 relative transition-all duration-300;
+    }
+
+    .nav-tab::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: #05A045;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .nav-tab.active {
+      @apply text-primary;
+    }
+
+    .nav-tab.active::after {
+      width: 70%;
+    }
+
+    .nav-tab:not(.active):hover {
+      @apply text-gray-600 bg-gray-100;
+    }
+
+    .mobile-nav-tab {
+      @apply px-4 py-3 relative transition-all;
+    }
+
+    .mobile-nav-tab::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: #05A045;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .mobile-nav-tab.active {
+      @apply text-primary;
+    }
+
+    .mobile-nav-tab.active::after {
+      width: 60%;
+    }
+
+    .mobile-nav-tab:not(.active):hover {
+      @apply text-gray-600 bg-gray-100;
+    }
+
+    .mobile-tab-container {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+    }
+
+    .tab-container {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      overflow: visible;
+    }
+
+    /* Header scroll effect */
+    .header-scrolled {
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+    
+    .header-initial {
+      background-color: transparent;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    
+    header {
+      transition: all 0.4s ease;
+      z-index: 100;
+    }
+
+    /* ===== HERO SECTION STYLES ===== */
+    .hero-glass {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 6.5%;
+      left: 50%;
+      width: 60%;
+      height: 10%;
+      background-image: url('../assets/logo.png');
+      background-size: cover;
+      background-position: center;
+      filter: blur(20px) opacity(0.4);
+      z-index: -1;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-content {
+      animation: fadeInUp 1s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-btn {
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .highlight {
+      position: relative;
+      display: inline-block;
+    }
+
+    .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 35%;
+      background: linear-gradient(to right, #05A045, #05A045);
+      opacity: 0.3;
+      z-index: -1;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .highlight:hover::after {
+      height: 50%;
+      opacity: 0.5;
+    }
+
+    .app-btn {
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .app-btn:hover {
+      transform: translateY(-5px);
+    }
+
+    /* QUICKMAN animation */
+    @keyframes quickmanAnimation {
+      0% {
+        transform: scale(0.5) rotate(-5deg);
+        opacity: 0;
+        letter-spacing: 30px;
+      }
+      50% {
+        transform: scale(1.1) rotate(2deg);
+        opacity: 1;
+        letter-spacing: 5px;
+      }
+      100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+        letter-spacing: normal;
+      }
+    }
+
+    .quickman-text {
+      animation: quickmanAnimation 1.5s ease-out forwards;
+      font-size: 8rem;
+      font-weight: 900;
+      line-height: 1;
+      color: #05A045;
+      text-shadow: 0 5px 15px rgba(5, 160, 69, 0.2);
+      margin-bottom: 2rem;
+      opacity: 0;
+    }
+
+    /* ===== SERVICES SECTION STYLES ===== */
+    .feature-card {
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Animation for feature cards */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Bike animation effects */
+    @keyframes ping-slow {
+      0% { transform: scale(0.8); opacity: 1; }
+      75%, 100% { transform: scale(2); opacity: 0; }
+    }
+
+    @keyframes speed-line {
+      0% { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(30px); opacity: 0; }
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-ping-slow {
+      animation: ping-slow 4s cubic-bezier(0,0,0.2,1) infinite;
+    }
+
+    .animate-speed-line {
+      animation: speed-line 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .animation-delay-100 {
+      animation-delay: 0.1s;
+    }
+
+    .animation-delay-200 {
+      animation-delay: 0.2s;
+    }
+
+    /* ===== ABOUT SECTION STYLES ===== */
+    /* Mission and vision cards */
+    .mission-card, .vision-card {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .vision-card {
+      animation-delay: 0.3s;
+    }
+    
+    .mission-card:hover {
+      box-shadow: 0 20px 40px rgba(5, 160, 69, 0.15);
+    }
+    
+    .vision-card:hover {
+      box-shadow: 0 20px 40px rgba(29, 78, 216, 0.15);
+    }
+
+    /* Impact cards */
+    .impact-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .impact-card:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+    
+    .impact-card:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+    
+    .impact-card:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    
+    .impact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(5, 160, 69, 0.1);
+    }
+    
+    @keyframes pulse-slow {
+      0% { opacity: 0.5; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.5; transform: scale(0.95); }
+    }
+    
+    .animate-pulse-slow {
+      animation: pulse-slow 3s ease-in-out infinite;
+    }
+
+    /* ===== UPCOMING SECTION STYLES ===== */
+    /* Phone mockup styles */
+    .phone-mockup {
+      position: relative;
+      width: 280px;
+      height: 560px;
+      border-radius: 40px;
+      background: #111;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+      overflow: hidden;
+      border: 12px solid #111;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    
+    .phone-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 24px;
+      background: #111;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      z-index: 10;
+    }
+    
+    .app-dev-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      transition: opacity 0.5s ease;
+    }
+    
+    .app-dev-video:hover {
+      opacity: 1;
+    }
+    
+    /* Animation for the phone */
+    @keyframes floatPhone {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    
+    .floating-phone {
+      animation: floatPhone 6s ease-in-out infinite;
+    }
+    
+    /* Glow effect */
+    .phone-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 350px;
+      height: 650px;
+      border-radius: 60px;
+      background: radial-gradient(circle, rgba(5, 160, 69, 0.2) 0%, rgba(5, 160, 69, 0) 70%);
+      z-index: -1;
+      filter: blur(20px);
+      opacity: 0.7;
+    }
+    
+    /* Scroll animation for the section */
+    @keyframes sectionAppear {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .section-appear {
+      animation: sectionAppear 1s ease-out forwards;
+    }
+
+    /* ===== CONTACT SECTION STYLES ===== */
+    .contact-item {
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(5, 160, 69, 0.1);
+    }
+    
+    .contact-action {
+      transition: all 0.3s ease;
+      transform: scale(1);
+    }
+    
+    .contact-action:hover {
+      transform: scale(1.03);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .newsletter-input {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(5, 160, 69, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: #05A045;
+      box-shadow: 0 0 0 3px rgba(5, 160, 69, 0.1);
+    }
+
+    .subscribe-btn {
+      background: #05A045;
+      transition: all 0.3s ease;
+    }
+
+    .subscribe-btn:hover {
+      background: #048035;
+      transform: translateY(-2px);
+    }
+
+    /* ===== FOOTER STYLES ===== */
+    .footer-glass {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-top: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .footer-link {
+      position: relative;
+      padding-bottom: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-link:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #05A045;
+      transition: width 0.3s ease;
+    }
+
+    .footer-link:hover:after {
+      width: 100%;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(5, 160, 69, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background: #05A045;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* ===== WHATSAPP BUTTON STYLES ===== */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+      background: #128C7E;
+    }
+
+    .whatsapp-pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    /* ===== SCROLL INDICATOR STYLES ===== */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #05A045, #1d4ed8);
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.2s ease;
+    }
+
+    /* ===== JUMP ANIMATION STYLES ===== */
+    @keyframes jumpFade {
+      0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+      50% { transform: translateY(-10px) scale(1.05); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .animate-jump {
+      animation: jumpFade 1s ease-out forwards;
+    }
+    
+    /* ===== SECTION ANCHORS ===== */
+    section[id] {
+      scroll-margin-top: 100px;
+    }
+    
+    /* Icon animations */
+    .feature-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover .feature-icon {
+      transform: scale(1.2);
+      color: #05A045;
+    }
+    
+    /* Success message styles */
+    .success-message {
+      background-color: #d1fae5;
+      border: 1px solid #10b981;
+      color: #047857;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-top: 16px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="relative">
+  <!-- Scroll progress indicator -->
+  <div class="scroll-indicator"></div>
+
+  <!-- Hero Background -->
+  <div class="hero-bg"></div>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-btn whatsapp-pulse">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 px-6 header-initial">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+        <img src="app_icon.png" alt="App Icon" class="w-10 h-10 object-contain" />
+        <img src="text_logo.png" alt="Text Logo" class="h-6 object-contain" />
+      </div>
+
+      <!-- Desktop Navigation Tabs -->
+      <div class="hidden lg:flex tab-container">
+        <a href="#home" class="nav-tab active">Home</a>
+        <a href="#services" class="nav-tab">Services</a>
+        <a href="#about" class="nav-tab">About</a>
+        <a href="#upcoming" class="nav-tab">Upcoming</a>
+        <a href="#contact" class="nav-tab">Contact</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="lg:hidden text-2xl text-slate-700" title="Open mobile menu"
+        aria-label="Open mobile menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="lg:hidden mobile-tab-container mt-3 p-4 hidden">
+      <div class="flex flex-col space-y-2">
+        <a href="#home" class="mobile-nav-tab active">Home</a>
+        <a href="#services" class="mobile-nav-tab">Services</a>
+        <a href="#about" class="mobile-nav-tab">About</a>
+        <a href="#upcoming" class="mobile-nav-tab">Upcoming</a>
+        <a href="#contact" class="mobile-nav-tab">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center px-6 py-12 relative">
+    <div class="max-w-7xl mx-auto w-full">
+      <!-- QUICKMAN Text Animation -->
+      <div class="text-center mb-12">
+        <h1 class="quickman-text">QUICKMAN</h1>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <!-- Left Column - Why Choose Us (Enhanced) -->
+        <div class="glass-card p-8 shadow-xl animate-fadeInLeft">
+          <h2 class="text-3xl font-bold mb-6 text-primary flex items-center">
+           
+            Why Customers Choose Us
+          </h2>
+          
+          <!-- Features with icons -->
+          <div class="space-y-6">
+            <div class="feature-card flex items-start">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4 feature-icon">
+                <i class="fas fa-bolt text-primary text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg text-black mb-1">Lightning-Fast Delivery</h3>
+                <p class="text-gray-700">Get your items delivered in record time with our optimized routes and dedicated riders.</p>
+              </div>
+            </div>
+            
+            <div class="feature-card flex items-start">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4 feature-icon">
+                <i class="fas fa-shield-alt text-primary text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg text-black mb-1">Safe & Secure Handling</h3>
+                <p class="text-gray-700">Your items are handled with care and delivered safely to your doorstep.</p>
+              </div>
+            </div>
+            
+            <div class="feature-card flex items-start">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4 feature-icon">
+                <i class="fas fa-wallet text-primary text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg text-black mb-1">Affordable Rates</h3>
+                <p class="text-gray-700">Quality service doesn't have to be expensive - we offer competitive pricing.</p>
+              </div>
+            </div>
+            
+            <div class="feature-card flex items-start">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4 feature-icon">
+                <i class="fas fa-clock text-primary text-xl"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg text-black mb-1">24/7 Availability</h3>
+                <p class="text-gray-700">Need something delivered at midnight? We're available round the clock.</p>
+              </div>
+            </div>
+          </div>
+          
+        
+        </div>
+
+        <!-- Right Column - QR Code and App Download -->
+        <div class="text-center animate-fadeInRight">
+          <div
+            class="bg-white/80 backdrop-blur-sm rounded-xl w-48 h-48 mx-auto flex items-center justify-center mb-6 border-2 border-primary/20 animate-float">
+            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-40 h-40 flex items-center justify-center">
+              <span class="text-gray-500">QR Code</span>
+            </div>
+          </div>
+          <p class="text-lg mb-6 font-medium">Scan the QR code and Download the app</p>
+
+          <!-- Combined Buttons in One Row -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button class="app-btn bg-black text-white py-3 px-6 rounded-xl flex items-center justify-center">
+              <i class="fab fa-google-play text-2xl mr-3"></i>
+              <div class="text-left">
+                <div class="text-xs">GET IT ON</div>
+                <div class="text-lg font-bold">Google Play</div>
+              </div>
+            </button>
+
+            <button class="app-btn bg-black text-white py-3 px-6 rounded-xl flex items-center justify-center">
+              <i class="fab fa-apple text-2xl mr-3"></i>
+              <div class="text-left">
+                <div class="text-xs">DOWNLOAD ON THE</div>
+                <div class="text-lg font-bold">App Store</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-20 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 bg-white bg-opacity-40 backdrop-blur-xl z-0 rounded-xl"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto">
+      <!-- Top Text Block with Image -->
+      <div class="bg-white/30 backdrop-blur-lg rounded-xl p-8 shadow-md mb-16 border border-white/50 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <!-- Left Column - Text Content -->
+        <div class="text-left">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-black mb-4">
+            What We Deliver – <span class="text-primary">Fast, Reliable & Anywhere!</span>
+          </h2>
+          <p class="text-gray-800 text-base">
+            In today's busy world, Quickman is your trusted delivery partner for anything that matters. From delicious meals to essential groceries, from surprise gifts to critical documents — we make sure your items reach the right place, on time. Our trained riders ensure safe, efficient, and contactless delivery every time.
+          </p>
+          <div class="mt-6">
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1 mr-3">
+                  <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                    <div class="w-2 h-2 rounded-full bg-primary"></div>
+                  </div>
+                </div>
+                <span>No queues, no stress — Just stay at your place</span>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1 mr-3">
+                  <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                    <div class="w-2 h-2 rounded-full bg-primary"></div>
+                  </div>
+                </div>
+                <span>We deliver to your door steps</span>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1 mr-3">
+                  <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                    <div class="w-2 h-2 rounded-full bg-primary"></div>
+                  </div>
+                </div>
+                <span>Experience the next level of convenience, right at your fingertips</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Right Column - Delivery Bike Image -->
+        <div class="flex justify-center">
+          <div class="relative">
+            <!-- Background decorative elements -->
+            <div class="absolute -top-8 -right-8 w-80 h-80 bg-primary/10 rounded-full blur-2xl z-0"></div>
+            <div class="absolute -bottom-8 -left-8 w-60 h-60 bg-primary/10 rounded-full blur-2xl z-0"></div>
+            
+            <!-- Main bike image container -->
+            <div class="relative z-10">
+              <img src="delevery_bike.png" 
+                   alt="Delivery Bike" 
+                   class="w-[400px] h-[400px] object-contain animate-float">
+            </div>
+            
+            <!-- Additional visual elements -->
+            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center z-0">
+              <div class="w-96 h-96 rounded-full border-4 border-primary/10 animate-ping-slow"></div>
+            </div>
+            
+            <!-- Speed lines for dynamic effect -->
+            <div class="absolute top-1/2 -left-16 transform -translate-y-1/2">
+              <div class="flex space-x-2">
+                <div class="w-4 h-16 bg-primary rounded-full animate-speed-line"></div>
+                <div class="w-4 h-12 bg-primary rounded-full animate-speed-line animation-delay-100"></div>
+                <div class="w-4 h-10 bg-primary rounded-full animate-speed-line animation-delay-200"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Heading -->
+      <h3 class="text-3xl font-semibold text-black mb-12 text-center">What We Deliver</h3>
+
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Food Delivery Card -->
+        <div
+          class="bg-white/30 backdrop-blur-md border border-white/40 shadow-lg rounded-xl p-6 hover:shadow-xl transition-all duration-300 feature-card group hover:scale-[1.03] cursor-pointer">
+          <div class="mb-4">
+            <i class="fas fa-hamburger text-[#05A045] text-3xl mr-3 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h4 class="font-bold text-lg text-black mb-2">Food Delivery</h4>
+          <p class="text-gray-700 text-sm">Enjoy your favorite meals from top restaurants delivered hot and fresh,
+            wherever you are.</p>
+        </div>
+
+        <!-- Grocery Delivery Card -->
+        <div
+          class="bg-white/30 backdrop-blur-md border border-white/40 shadow-lg rounded-xl p-6 hover:shadow-xl transition-all duration-300 feature-card group hover:scale-[1.03] cursor-pointer">
+          <div class="mb-4">
+            <i class="fas fa-shopping-basket text-[#05A045] text-3xl mr-3 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h4 class="font-bold text-lg text-black mb-2">Grocery Delivery</h4>
+          <p class="text-gray-700 text-sm">Get your daily essentials, fruits, and vegetables delivered — even at night!
+          </p>
+        </div>
+
+        <!-- Document Delivery Card -->
+        <div
+          class="bg-white/30 backdrop-blur-md border border-white/40 shadow-lg rounded-xl p-6 hover:shadow-xl transition-all duration-300 feature-card group hover:scale-[1.03] cursor-pointer">
+          <div class="mb-4">
+            <i class="fas fa-file-alt text-[#05A045] text-3xl mr-3 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h4 class="font-bold text-lg text-black mb-2">Important Document Delivery</h4>
+          <p class="text-gray-700 text-sm">Deliver sensitive documents safely with secure handling and tracking.</p>
+        </div>
+
+        <!-- Parcel Delivery Card -->
+        <div
+          class="bg-white/30 backdrop-blur-md border border-white/40 shadow-lg rounded-xl p-6 hover:shadow-xl transition-all duration-300 feature-card group hover:scale-[1.03] cursor-pointer">
+          <div class="mb-4">
+            <i class="fas fa-box text-[#05A045] text-3xl mr-3 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h4 class="font-bold text-lg text-black mb-2">Parcel & Item Delivery</h4>
+          <p class="text-gray-700 text-sm">From keys to personal items — we deliver anything that fits on a bike or in a
+            box.</p>
+        </div>
+
+        <!-- Laundry Service Card -->
+        <div
+          class="bg-white/30 backdrop-blur-md border border-white/40 shadow-lg rounded-xl p-6 hover:shadow-xl transition-all duration-300 feature-card group hover:scale-[1.03] cursor-pointer">
+          <div class="mb-4">
+            <i class="fas fa-tshirt text-[#05A045] text-3xl mr-3 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h4 class="font-bold text-lg text-black mb-2">Laundry & Dry Cleaning Pickup</h4>
+          <p class="text-gray-700 text-sm">Clothes picked up and delivered clean — even late hours!</p>
+        </div>
+
+        <!-- Pharmacy Delivery Card -->
+        <div
+          class="bg-white/30 backdrop-blur-md border border-white/40 shadow-lg rounded-xl p-6 hover:shadow-xl transition-all duration-300 feature-card group hover:scale-[1.03] cursor-pointer">
+          <div class="mb-4">
+            <i class="fas fa-pills text-[#05A045] text-3xl mr-3 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h4 class="font-bold text-lg text-black mb-2">Pharmacy & Medicine Delivery</h4>
+          <p class="text-gray-700 text-sm">We deliver essential medicines and health items exactly when you need them.
+          </p>
+        </div>
+
+        <!-- Gift Delivery Card -->
+        <div
+          class="bg-white/30 backdrop-blur-md border border-white/40 shadow-lg rounded-xl p-6 hover:shadow-xl transition-all duration-300 feature-card group hover:scale-[1.03] cursor-pointer">
+          <div class="mb-4">
+            <i class="fas fa-gift text-[#05A045] text-3xl mr-3 group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h4 class="font-bold text-lg text-black mb-2">Surprise & Gift Delivery</h4>
+          <p class="text-gray-700 text-sm">Send cakes, flowers, and gifts to loved ones with care and speed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto space-y-16">
+      <!-- What Moves Us & About QuickMan -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- What Moves Us Card -->
+        <div class="glass p-8 rounded-xl shadow-md animate-jump">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+              <i class="fas fa-bolt text-primary text-xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-black">What Moves Us</h2>
+          </div>
+          <p class="text-gray-800">
+            At Quickman, we believe in simplifying everyday life through fast, smart, and secure delivery solutions. Whether it's a hot meal, a forgotten document, or a surprise gift — we move with purpose to connect people, products, and possibilities.
+          </p>
+          <div class="mt-6 bg-primary/5 p-4 rounded-lg border border-primary/10">
+            <p class="text-primary font-medium">
+              We are more than a delivery service; we are your daily assistant, on the road, rain or shine.
+            </p>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-2">
+            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Fast Delivery</span>
+            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Smart Solutions</span>
+            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Secure Handling</span>
+            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">24/7 Service</span>
+          </div>
+        </div>
+
+        <!-- About QuickMan Card -->
+        <div class="glass p-8 rounded-xl shadow-md animate-jump" style="animation-delay: 0.2s">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+              <i class="fas fa-building text-primary text-xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-black">About QuickMan</h2>
+          </div>
+          <p class="text-gray-800 mb-4">
+            QuickMan Pvt Ltd is a trusted local delivery partner dedicated to providing quick, safe, and reliable delivery solutions. We specialize in transporting packages, food, documents, and other goods across cities and neighborhoods using motorcycles.
+          </p>
+          <p class="text-gray-800">
+            Our mission is to make every delivery stress-free and on time, ensuring both businesses and customers can count on us every day.
+          </p>
+          <div class="mt-8 grid grid-cols-2 gap-4">
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <i class="fas fa-check text-primary text-sm"></i>
+              </div>
+              <span class="text-gray-700">Trusted Partner</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <i class="fas fa-check text-primary text-sm"></i>
+              </div>
+              <span class="text-gray-700">City Coverage</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <i class="fas fa-check text-primary text-sm"></i>
+              </div>
+              <span class="text-gray-700">Motorcycle Fleet</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <i class="fas fa-check text-primary text-sm"></i>
+              </div>
+              <span class="text-gray-700">Stress-Free</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- QuickMan Impact Section -->
+      <div class="glass p-8 rounded-xl shadow-md overflow-hidden relative">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mt-32 -mr-32"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl -mb-24 -ml-24"></div>
+        
+        <!-- Section header -->
+        <div class="flex items-center mb-8">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+            <i class="fas fa-bullseye text-primary text-xl"></i>
+          </div>
+          <h3 class="text-3xl font-bold text-primary">QuickMan Impact</h3>
+        </div>
+        
+        <!-- Intro text -->
+        <p class="text-gray-700 text-lg mb-10 max-w-3xl">
+          At QuickMan, we believe a great delivery service should do more than just move packages — it should create real impact in the community.
+        </p>
+        
+        <!-- Impact grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Impact Card 1 -->
+          <div class="impact-card bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-primary/10 hover:border-primary/30 transition-all">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fas fa-motorcycle text-primary text-xl"></i>
+              </div>
+              <h4 class="text-xl font-bold text-primary">Empowering Local Riders</h4>
+            </div>
+            <p class="text-gray-700">
+              We provide job opportunities and fair income for riders, helping them support their families and grow their skills while serving neighborhoods with care.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Job Creation</span>
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Skill Development</span>
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Fair Income</span>
+            </div>
+          </div>
+          
+          <!-- Impact Card 2 -->
+          <div class="impact-card bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-primary/10 hover:border-primary/30 transition-all">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fas fa-store text-primary text-xl"></i>
+              </div>
+              <h4 class="text-xl font-bold text-primary">Supporting Small Businesses</h4>
+            </div>
+            <p class="text-gray-700">
+              QuickMan connects local shops, restaurants, and vendors with their customers faster and more reliably, helping them expand their reach and build lasting trust.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Market Expansion</span>
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Reliable Service</span>
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Customer Trust</span>
+            </div>
+          </div>
+          
+          <!-- Impact Card 3 -->
+          <div class="impact-card bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-primary/10 hover:border-primary/30 transition-all">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fas fa-hands-helping text-primary text-xl"></i>
+              </div>
+              <h4 class="text-xl font-bold text-primary">Strengthening Communities</h4>
+            </div>
+            <p class="text-gray-700">
+              By making deliveries more efficient, affordable, and safe, we help people save time and focus on what really matters — their families, work, and dreams.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Time Savings</span>
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Community Focus</span>
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Safety First</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Bottom graphic -->
+        <div class="mt-10 flex justify-center">
+          <div class="relative">
+            <div class="absolute inset-0 bg-primary/5 rounded-full blur-xl animate-pulse-slow"></div>
+            <div class="relative z-10 bg-primary/10 px-6 py-3 rounded-full text-primary font-medium">
+              <i class="fas fa-heart mr-2"></i> Making a difference in every delivery
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mission & Vision Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
+        <!-- Mission Card -->
+        <div class="mission-card bg-white rounded-2xl shadow-xl p-8 border-t-4 border-primary transform transition-all duration-500 hover:-translate-y-2">
+          <div class="flex items-start mb-6">
+            <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+              <i class="fas fa-flag-checkered text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-3xl font-bold text-primary">Our Mission</h3>
+          </div>
+          <div class="pl-18">
+            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+              To deliver trust, speed, and satisfaction to every doorstep while empowering local businesses to grow through dependable delivery solutions.
+            </p>
+            <p class="text-gray-700 text-lg leading-relaxed">
+              We aim to keep every promise on time, every time.
+            </p>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <span class="bg-primary/10 text-primary px-4 py-2 rounded-full font-medium">Trust</span>
+            <span class="bg-primary/10 text-primary px-4 py-2 rounded-full font-medium">Speed</span>
+            <span class="bg-primary/10 text-primary px-4 py-2 rounded-full font-medium">Satisfaction</span>
+          </div>
+        </div>
+        
+        <!-- Vision Card -->
+        <div class="vision-card bg-white rounded-2xl shadow-xl p-8 border-t-4 border-primary transform transition-all duration-500 hover:-translate-y-2" style="animation-delay: 0.2s">
+          <div class="flex items-start mb-6">
+            <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+              <i class="fas fa-eye text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-3xl font-bold text-primary">Our Vision</h3>
+          </div>
+          <div class="pl-18">
+            <p class="text-gray-700 text-lg leading-relaxed">
+              To become Sri Lanka's most reliable and preferred delivery service by combining smart technology, dedicated riders, and exceptional customer care — connecting people and businesses seamlessly, island wide.
+            </p>
+          </div>
+          <div class="mt-8 grid grid-cols-2 gap-4">
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center mr-3">
+                <i class="fas fa-check text-primary"></i>
+              </div>
+              <span class="text-gray-700">Reliable Service</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center mr-3">
+                <i class="fas fa-check text-primary"></i>
+              </div>
+              <span class="text-gray-700">Smart Technology</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <i class="fas fa-check text-primary"></i>
+              </div>
+              <span class="text-gray-700">Exceptional Care</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <i class="fas fa-check text-primary"></i>
+              </div>
+              <span class="text-gray-700">Island-Wide</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Founder Section -->
+      <div class="bg-gradient-to-r from-primary/5 to-white rounded-3xl shadow-xl overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+          <!-- Founder Information -->
+          <div class="p-10">
+            <div class="flex items-center mb-6">
+              <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fas fa-user-tie text-primary text-2xl"></i>
+              </div>
+              <h3 class="text-3xl font-bold text-gray-800">About the Founder</h3>
+            </div>
+            
+            <p class="text-gray-700 text-lg mb-6">
+              <span class="font-bold text-primary">QuickMan</span> was founded by <span class="font-bold">Balakrishnam Pradeep</span>, a passionate entrepreneur with a vision to redefine local delivery services in Sri Lanka.
+            </p>
+            
+            <div class="space-y-4 mb-8">
+              <div class="flex">
+                <div class="flex-shrink-0 mr-4 mt-1">
+                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                    <div class="w-2 h-2 rounded-full bg-primary"></div>
+                  </div>
+                </div>
+                <p class="text-gray-700">
+                  With a strong background in IT and customer service, he understands the need for fast, flexible, and affordable delivery solutions that build trust between businesses and their customers.
+                </p>
+              </div>
+              
+              <div class="flex">
+                <div class="flex-shrink-0 mr-4 mt-1">
+                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                    <div class="w-2 h-2 rounded-full bg-primary"></div>
+                  </div>
+                </div>
+                <p class="text-gray-700">
+                  Under his leadership, QuickMan strives to grow with integrity, innovation, and a commitment to quality service.
+                </p>
+              </div>
+            </div>
+            
+            <div class="bg-primary/5 p-5 rounded-xl border border-primary/10">
+              <p class="text-primary italic font-medium">
+                "Our goal is not just to deliver packages, but to deliver peace of mind. Every QuickMan delivery represents our commitment to reliability and customer satisfaction."
+              </p>
+              <p class="text-right mt-2 text-primary font-semibold">— Balakrishnam Pradeep</p>
+            </div>
+          </div>
+          
+          <!-- Founder Image -->
+          <div class="relative flex items-center justify-center p-10">
+            <div class="relative z-10">
+              <div class="relative">
+                <div class="absolute -inset-4 bg-primary/10 rounded-full blur-xl z-0"></div>
+                <div class="relative z-10">
+                  <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-96 flex items-center justify-center">
+                    <div class="text-center">
+                      <i class="fas fa-user text-5xl text-gray-400 mb-4"></i>
+                      <p class="text-gray-500">Founder Image</p>
+                      <p class="text-sm text-gray-400 mt-2">Balakrishnam Pradeep</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-8 grid grid-cols-3 gap-4">
+                <div class="bg-primary/5 p-3 rounded-lg text-center">
+                  <div class="text-2xl font-bold text-primary">100+</div>
+                  <div class="text-sm text-gray-600">Riders</div>
+                </div>
+                <div class="bg-primary/5 p-3 rounded-lg text-center">
+                  <div class="text-2xl font-bold text-primary">10K+</div>
+                  <div class="text-sm text-gray-600">Deliveries</div>
+                </div>
+                <div class="bg-primary/5 p-3 rounded-lg text-center">
+                  <div class="text-2xl font-bold text-primary">15+</div>
+                  <div class="text-sm text-gray-600">Cities</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Values -->
+      <div class="glass p-8 rounded-xl shadow-md fade-in" id="our-values">
+        <h3 class="text-2xl font-bold text-primary mb-8 flex items-center">
+          <i class="fas fa-heart mr-3 text-primary"></i> Our Values
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <!-- Customer First -->
+          <div
+            class="feature-card p-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/40 hover:scale-105 transition-all duration-300 group hover-glow">
+            <div class="flex items-start space-x-4">
+              <i class="fas fa-users text-2xl icon-green mt-1"></i>
+              <div>
+                <h4 class="font-bold text-lg text-black mb-1">Customer First</h4>
+                <p class="text-gray-700 text-sm">"Every tap matters. Every delivery is personal."  We put our customers at the center of everything we do. From seamless app experience to real-time support, we treat every order as urgent and personal. Whether it’s a surprise gift or daily groceries, we aim to deliver smiles — not just parcels.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Speed with Safety -->
+          <div
+            class="feature-card p-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/40 hover:scale-105 transition-all duration-300 group hover-glow">
+            <div class="flex items-start space-x-4">
+              <i class="fas fa-shield-alt text-2xl icon-green mt-1"></i>
+              <div>
+                <h4 class="font-bold text-lg text-black mb-1">Speed with Safety</h4>
+                <p class="text-gray-700 text-sm">"Fast is good. Safe is better. We bring both.  Time matters, but so does care.  Our riders are trained to prioritize safety on the road while ensuring your deliveries arrive on time.  We use smart route planning and rider coordination to deliver faster — without risking lives or damaging packages.  Speed is important, but your safety and trust come first every time.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transparency -->
+          <div
+            class="feature-card p-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/40 hover:scale-105 transition-all duration-300 group hover-glow">
+            <div class="flex items-start space-x-4">
+              <i class="fas fa-eye text-2xl icon-green mt-1"></i>
+              <div>
+                <h4 class="font-bold text-lg text-black mb-1">Transparency</h4>
+                <p class="text-gray-700 text-sm">"No hidden fees. No guesswork. Just clear delivery."  We believe trust comes from clarity. Our app shows upfront pricing and accurate ETAs — so you always know what you're paying for, and when it’s arriving. There are no surprises, only what you choose to send or receive.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Innovation -->
+          <div
+            class="feature-card p-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/40 hover:scale-105 transition-all duration-300 group hover-glow">
+            <div class="flex items-start space-x-4">
+              <i class="fas fa-lightbulb text-2xl icon-green mt-1"></i>
+              <div>
+                <h4 class="font-bold text-lg text-black mb-1">Innovation</h4>
+                <p class="text-gray-700 text-sm">"Tech-powered. Future-focused."  We continuously invest in smarter technologies to improve our services — from route optimization and rider analytics to eco-friendly delivery options. Quickmen is not just keeping up with the world — we’re building what’s next.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lifting Others -->
+          <div
+            class="feature-card p-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/40 hover:scale-105 transition-all duration-300 group hover-glow">
+            <div class="flex items-start space-x-4">
+              <i class="fas fa-hands-helping text-2xl icon-green mt-1"></i>
+              <div>
+                <h4 class="font-bold text-lg text-black mb-1">We Rise by Lifting Others</h4>
+                <p class="text-gray-700 text-sm">We’re committed to uplifting everyone in our ecosystem — riders, local businesses, customers, and team members. By offering flexible work, fair pay, and growth opportunities, we create an environment where everyone can thrive together.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flexible Payment Options -->
+          <div
+            class="feature-card p-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/40 hover:scale-105 transition-all duration-300 group hover-glow">
+            <div class="flex items-start space-x-4">
+              <i class="fas fa-credit-card text-2xl icon-green mt-1"></i>
+              <div>
+                <h4 class="font-bold text-lg text-black mb-1">Flexible Payment Options</h4>
+                <p class="text-gray-700 text-sm">We offer online payments, card payments, and cash on delivery for your convenience.  Choose what works for you, with secure transactions and instant confirmations.  Pay your way, stress-free.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Section -->
+  <section id="upcoming" class="py-20 px-6 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <!-- Section Heading -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-black mb-4">
+          <span class="highlight relative">Upcoming</span>
+        </h2>
+        <p class="text-gray-700 max-w-2xl mx-auto text-lg">
+          Our app development is in progress - exciting features coming soon!
+        </p>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="relative">
+          <div class="phone-glow"></div>
+          
+          <div class="phone-mockup floating-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <!-- Video showing app development process -->
+              <video class="app-dev-video" autoplay loop muted playsinline>
+                <source src="6999824_Motion_Graphics_Animation_3840x2160.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Decorative elements -->
+    <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-primary/10 blur-3xl -z-10"></div>
+    <div class="absolute bottom-10 left-10 w-48 h-48 rounded-full bg-secondary/10 blur-3xl -z-10"></div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6">
+    <div class="bg-gray-100 py-12 px-4 sm:px-8 lg:px-16">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Contact Info -->
+        <div class="glass p-6 shadow-md rounded-xl overflow-hidden relative">
+          <!-- Decorative elements -->
+          <div class="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-xl -mt-24 -mr-24"></div>
+          <div class="absolute bottom-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-xl -mb-16 -ml-16"></div>
+          
+          <h2 class="text-xl font-bold text-primary mb-6 flex items-center">
+            <i class="fas fa-address-card mr-3 text-primary"></i>
+            Contact Information
+          </h2>
+          
+          <div class="space-y-4">
+            <!-- Address -->
+            <div class="contact-item bg-white/80 p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover:shadow-md">
+              <div class="flex items-start">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                  <i class="fas fa-map-marker-alt text-primary"></i>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-700 mb-1">Address</p>
+                  <p class="text-gray-600">No. 12, Park Street, Colombo 02, Sri Lanka</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Phone Numbers -->
+            <div class="contact-item bg-white/80 p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover:shadow-md">
+              <div class="flex items-start">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                  <i class="fas fa-phone-alt text-primary"></i>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-700 mb-1">Phone Numbers</p>
+                  <div class="space-y-1">
+                    <p class="text-gray-600 flex items-center">
+                      <i class="fas fa-circle text-primary text-xs mr-2"></i> +94 76 969 2221
+                    </p>
+                    <p class="text-gray-600 flex items-center">
+                      <i class="fas fa-circle text-primary text-xs mr-2"></i> +94 77 161 2226
+                    </p>
+                    <p class="text-gray-600 flex items-center">
+                      <i class="fas fa-circle text-primary text-xs mr-2"></i> +94 76 674 2200
+                    </p>
+                  </div>
+                  <div class="mt-2 text-xs text-primary font-medium flex items-center">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Email -->
+            <div class="contact-item bg-white/80 p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover:shadow-md">
+              <div class="flex items-start">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                  <i class="fas fa-envelope text-primary"></i>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-700 mb-1">Email</p>
+                  <p class="text-gray-600">info@quickman.lk</p>
+                  <div class="mt-2">
+                    <a href="mailto:info@quickman.lk" class="text-primary font-medium text-sm flex items-center hover:underline">
+                      <i class="fas fa-paper-plane mr-2"></i> Send us a message
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Working Hours -->
+            <div class="contact-item bg-white/80 p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover:shadow-md">
+              <div class="flex items-start">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                  <i class="fas fa-clock text-primary"></i>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-700 mb-1">Working Hours</p>
+                  <p class="text-gray-600">Monday – Sunday: 8:00 AM – 11:00 PM</p>
+                  <div class="mt-2 flex items-center text-sm bg-green-50 text-green-700 px-3 py-1 rounded-full inline-block">
+                    <i class="fas fa-check-circle mr-1"></i> Including holidays and pay days
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Map + Contact Form -->
+        <div class="lg:col-span-2 flex flex-col gap-6">
+          <!-- Map -->
+          <div class="rounded-xl overflow-hidden shadow-md">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15843.112156637227!2d79.8462131!3d6.9270785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593e3b0c3b8f%3A0x3e3dcd8c5d3f5a6!2sPark%20Street%2C%20Colombo!5e0!3m2!1sen!2slk!4v1716815870243!5m2!1sen!2slk"
+              class="w-full h-64 border-0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="glass p-6 shadow-md space-y-4">
+            <div>
+              <label for="contact-email" class="block text-sm font-medium text-gray-700">Email</label>
+              <input type="email" id="contact-email" placeholder="example@email.com" required
+                class="mt-1 w-full border rounded-lg px-4 py-2 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
+            </div>
+
+            <div>
+              <label for="contact-name" class="block text-sm font-medium text-gray-700">Name</label>
+              <input type="text" id="contact-name" placeholder="Full name" required
+                class="mt-1 w-full border rounded-lg px-4 py-2 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
+            </div>
+
+            <div>
+              <label for="contact-message" class="block text-sm font-medium text-gray-700">Message</label>
+              <textarea id="contact-message" rows="4" placeholder="Write your message...." required
+                class="mt-1 w-full border rounded-lg px-4 py-2 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
+            </div>
+
+            <button id="send-message-btn"
+              class="w-full bg-green-500 hover:bg-green-600 text-white font-medium text-sm py-2.5 rounded-lg transition duration-200">
+              Send your Message
+            </button>
+            
+            <div id="success-message" class="success-message">
+              <i class="fas fa-check-circle mr-2"></i> Your message has been prepared. Please check your email client to send it.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-b from-primary/10 to-white pt-16 pb-8 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <!-- Logo and Description -->
+        <div>
+          <!-- Logo -->
+          <div class="flex items-center space-x-3">
+            <img src="app_icon.png" alt="App Icon" class="w-10 h-10 object-contain" />
+            <img src="text_logo.png" alt="Text Logo" class="h-6 object-contain" />
+          </div>
+          <p class="text-gray-600 mb-6">
+            Delivering your essentials with speed and care. We're committed to making your life easier with fast, reliable delivery services.
+          </p>
+          <div class="flex space-x-4">
+            <a href="https://web.facebook.com/people/QuickMan/61555613396661/" class="social-icon text-primary">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://x.com/QuickmanApp" class="social-icon text-primary">
+              <i class="fab fa-twitter"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/company/quickman" class="social-icon text-primary">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-xl font-bold text-primary mb-6">Quick Links</h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="#home" class="footer-link text-gray-600 hover:text-primary">Home</a>
+            </li>
+            <li>
+              <a href="#services" class="footer-link text-gray-600 hover:text-primary">Services</a>
+            </li>
+            <li>
+              <a href="#about" class="footer-link text-gray-600 hover:text-primary">About Us</a>
+            </li>
+            <li>
+              <a href="#upcoming" class="footer-link text-gray-600 hover:text-primary">Upcoming</a>
+            </li>
+            <li>
+              <a href="#contact" class="footer-link text-gray-600 hover:text-primary">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h3 class="text-xl font-bold text-primary mb-6">Our Services</h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="#" class="footer-link text-gray-600 hover:text-primary">Food Delivery</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link text-gray-600 hover:text-primary">Grocery Delivery</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link text-gray-600 hover:text-primary">Parcel Delivery</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link text-gray-600 hover:text-primary">Document Delivery</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link text-gray-600 hover:text-primary">Medicine Delivery</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h3 class="text-xl font-bold text-primary mb-6">Newsletter</h3>
+          <p class="text-gray-600 mb-4">
+            Subscribe to our newsletter for the latest updates and offers.
+          </p>
+          <form class="space-y-4">
+            <div>
+              <input type="email" placeholder="Your email address" 
+                     class="w-full px-4 py-3 rounded-xl newsletter-input focus:outline-none">
+            </div>
+            <button type="submit" 
+                    class="subscribe-btn w-full py-3 text-white font-medium rounded-xl">
+              Subscribe Now
+            </button>
+          </form>
+          <div class="mt-8">
+            <h4 class="font-semibold text-gray-700 mb-3">Download App</h4>
+            <div class="flex space-x-3">
+              <button class="bg-black text-white py-2 px-4 rounded-lg flex items-center">
+                <i class="fab fa-google-play mr-2"></i>
+                <div>
+                  <div class="text-xs">GET IT ON</div>
+                  <div class="font-medium">Google Play</div>
+                </div>
+              </button>
+              <button class="bg-black text-white py-2 px-4 rounded-lg flex items-center">
+                <i class="fab fa-apple mr-2"></i>
+                <div>
+                  <div class="text-xs">DOWNLOAD ON</div>
+                  <div class="font-medium">App Store</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="copyright mt-12 pt-6 text-center">
+        <p class="text-gray-600">
+          &copy; 2025 Quickman Delivery Services. All rights reserved.
+        </p>
+        <div class="mt-4 flex justify-center space-x-6">
+          <a href="#" class="text-gray-600 hover:text-primary">Privacy Policy</a>
+          <a href="#" class="text-gray-600 hover:text-primary">Terms of Service</a>
+          <a href="#" class="text-gray-600 hover:text-primary">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== MOBILE MENU TOGGLE =====
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      menuButton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function (event) {
+        if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+
+      // ===== SMOOTH SCROLLING FOR ANCHOR LINKS =====
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (mobileMenu) mobileMenu.classList.add('hidden');
+
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // ===== HEADER SCROLL EFFECT =====
+      const header = document.querySelector('header');
+      if (header) {
+        window.addEventListener('scroll', function () {
+          if (window.scrollY > 50) {
+            header.classList.remove('header-initial');
+            header.classList.add('header-scrolled');
+          } else {
+            header.classList.remove('header-scrolled');
+            header.classList.add('header-initial');
+          }
+        });
+      }
+
+      // ===== SCROLL PROGRESS INDICATOR =====
+      const scrollIndicator = document.querySelector('.scroll-indicator');
+      if (scrollIndicator) {
+        window.addEventListener('scroll', () => {
+          const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const scrolled = (window.scrollY / scrollHeight) * 100;
+          scrollIndicator.style.width = `${scrolled}%`;
+        });
+      }
+
+      // ===== ANIMATE HERO CONTENT =====
+      const heroContent = document.querySelector('.hero-content');
+      if (heroContent) {
+        setTimeout(() => {
+          heroContent.style.opacity = 1;
+          heroContent.style.transform = 'translateY(0)';
+        }, 300);
+      }
+      
+      // ===== WHATSAPP BUTTON ANIMATION =====
+      const whatsappBtn = document.querySelector('.whatsapp-btn');
+      
+      // Add hover effect
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener('mouseenter', function() {
+          this.classList.remove('whatsapp-pulse');
+        });
+        
+        whatsappBtn.addEventListener('mouseleave', function() {
+          this.classList.add('whatsapp-pulse');
+        });
+      }
+
+      // ===== ACTIVE TAB INDICATOR =====
+      const sections = document.querySelectorAll('section[id]');
+      const navTabs = document.querySelectorAll('.nav-tab, .mobile-nav-tab');
+      
+      // Set scroll margin for all sections
+      sections.forEach(section => {
+        section.style.scrollMargin = '100px';
+      });
+      
+      // Update active tab based on scroll position
+      function updateActiveTab() {
+        let currentSectionId = '';
+        
+        // Find the section currently in view
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 200 && rect.bottom >= 200) {
+            currentSectionId = section.id;
+          }
+        });
+        
+        // Update tabs
+        navTabs.forEach(tab => {
+          const href = tab.getAttribute('href').substring(1);
+          if (href === currentSectionId) {
+            tab.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+          }
+        });
+      }
+      
+      // Initial call
+      updateActiveTab();
+      
+      // Update on scroll
+      window.addEventListener('scroll', updateActiveTab);
+      
+      // ===== SECTION ANIMATIONS =====
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-jump');
+            }
+          });
+        },
+        {
+          threshold: 0.2,
+        }
+      );
+
+      const target = document.getElementById('jump-section');
+      if (target) observer.observe(target);
+      
+      // ===== CONTACT FORM SUBMISSION =====
+      const sendBtn = document.getElementById('send-message-btn');
+      const successMessage = document.getElementById('success-message');
+      
+      if (sendBtn) {
+        sendBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const email = document.getElementById('contact-email').value;
+          const name = document.getElementById('contact-name').value;
+          const message = document.getElementById('contact-message').value;
+          
+          // Basic validation
+          if (!email || !name || !message) {
+            alert('Please fill in all fields');
+            return;
+          }
+          
+          // Format the email body
+          const subject = `Message from ${name} via Quickman Website`;
+          const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+          
+          // Create mailto link
+          const mailtoLink = `mailto:sadaruwankarunathilaka68@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          
+          // Open the user's email client
+          window.location.href = mailtoLink;
+          
+          // Show success message
+          successMessage.style.display = 'block';
+          
+          // Reset form after 5 seconds
+          setTimeout(() => {
+            document.getElementById('contact-email').value = '';
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-message').value = '';
+            successMessage.style.display = 'none';
+          }, 5000);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
